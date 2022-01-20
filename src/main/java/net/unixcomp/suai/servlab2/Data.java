@@ -37,7 +37,7 @@ public class Data {
     }
 
     public Set<String> rmRoom(@NotNull String room) {
-        synchronized (BaseServlet.class) {
+        synchronized (rooms) {
             rooms.remove(room);
         }
 
@@ -45,7 +45,7 @@ public class Data {
     }
 
     public Set<String> rmPerson(@NotNull String person) {
-        synchronized (BaseServlet.class) {
+        synchronized (people) {
             people.remove(person);
         }
 

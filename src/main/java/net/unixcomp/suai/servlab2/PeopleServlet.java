@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -11,8 +12,7 @@ import java.io.PrintWriter;
 
 
 @WebServlet(name="people", urlPatterns = "/people")
-public class PeopleServlet extends BaseServlet {
-    private Data data;
+public class PeopleServlet extends DataServlet {
 
     @Override
     public void doGet(@NotNull HttpServletRequest req, @NotNull HttpServletResponse res) throws IOException {
@@ -47,13 +47,6 @@ public class PeopleServlet extends BaseServlet {
         out.println("<button type='submit'>ADD</button></form>");
 
         out.println("</body></html>");
-    }
-
-    @Override
-    public void init() throws ServletException {
-        super.init();
-
-        data = new Data();
     }
 
     @Override

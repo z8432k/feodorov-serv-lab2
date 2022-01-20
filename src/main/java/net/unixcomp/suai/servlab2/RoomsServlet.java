@@ -2,7 +2,6 @@ package net.unixcomp.suai.servlab2;
 
 import org.jetbrains.annotations.NotNull;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
@@ -10,9 +9,7 @@ import java.io.*;
 
 
 @WebServlet(name="rooms", urlPatterns = "/rooms")
-public class RoomsServlet extends HttpServlet {
-    private Data data;
-
+public class RoomsServlet extends DataServlet {
     @Override
     public void doGet(@NotNull HttpServletRequest req, @NotNull HttpServletResponse res) throws IOException {
         res.setContentType("text/html");

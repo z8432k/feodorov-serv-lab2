@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -13,16 +14,7 @@ import java.util.Set;
 
 
 @WebServlet(name="rights", urlPatterns = "/rights")
-public class RightsServlet extends BaseServlet {
-    private Data data;
-
-    @Override
-    public void init() throws ServletException {
-        super.init();
-
-        data = new Data();
-    }
-
+public class RightsServlet extends DataServlet {
     @Override
     public void doGet(HttpServletRequest req, @NotNull HttpServletResponse res) throws IOException {
         res.setContentType("text/html");
