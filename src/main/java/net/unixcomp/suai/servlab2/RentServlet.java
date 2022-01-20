@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 
-// @WebServlet(name="rent", urlPatterns = "/rent")
+@WebServlet(name="rent", urlPatterns = "/rent")
 public class RentServlet extends BaseServlet {
 
     @Override
@@ -30,17 +30,15 @@ public class RentServlet extends BaseServlet {
 
         out.println("<thead><tr><th>Person</th><th>Room</th><th>Actions</th></tr></thead><tbody>");
 
-        data.getRights().forEach((client, rooms) -> {
-            for (String room : rooms ) {
+        rent.forEach((client, room) -> {
                 out.println("<tr><td>"+ client +"</td><td>"+ room +"</td><td>");
 
-                String field = ""++ ::
 
-                out.println("<form action='rights' method='POST'><input type='hidden' name='method' value='delete' /><input type='hidden' name='rights' value=''/><button>REVOKE</button></form>");
+                out.println("<form action='rent' method='POST'><input type='hidden' name='method' value='delete' /><input type='hidden' name='rights' value=''/><button>REVOKE</button></form>");
 
 
                 out.println("</td></tr>");
-            }
+
         });
 
         out.println("</tbody></table>");
