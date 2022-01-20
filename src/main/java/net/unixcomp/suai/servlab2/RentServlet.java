@@ -31,25 +31,20 @@ public class RentServlet extends BaseServlet {
         out.println("<thead><tr><th>Person</th><th>Room</th><th>Actions</th></tr></thead><tbody>");
 
         rent.forEach((client, room) -> {
-                out.println("<tr><td>"+ client +"</td><td>"+ room +"</td><td>");
-
-
-                out.println("<form action='rent' method='POST'><input type='hidden' name='method' value='delete' /><input type='hidden' name='rights' value=''/><button>REVOKE</button></form>");
-
-
-                out.println("</td></tr>");
-
+            out.println("<tr><td>"+ client +"</td><td>"+ room +"</td><td>");
+            out.println("<form action='rent' method='POST'><input type='hidden' name='method' value='delete' /><input type='hidden' name='client' value='"+ client +"'/><button>Unrent</button></form>");
+            out.println("</td></tr>");
         });
 
         out.println("</tbody></table>");
         out.println("<hr />");
 
-        out.println("<form method='post' path='rights'><br />");
+        out.println("<form method='post' path='rent'><br />");
 
-        out.println("<label>Person <select name='person'>"+ printOptions(data.getPeople(), null) +"</select></label><br />");
-        out.println("<label>Room <select name='room'>"+ printOptions(data.getRooms(), null) +"</select></label><br />");
+        out.println("<label>Client <select name='client'>"+ printOptions(clients, null) +"</select></label>");
+        out.println("<label>Room <select name='room'>"+ printOptions(rooms, rent) +"</select></label>");
 
-        out.println("<button type='submit'>GRANT</button></form>");
+        out.println("<button type='submit'>rent</button></form>");
         out.println("</body></html>");
     }
 

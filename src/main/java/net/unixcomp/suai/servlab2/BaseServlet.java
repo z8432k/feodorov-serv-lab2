@@ -9,14 +9,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 public abstract class BaseServlet extends HttpServlet  {
-    protected Set<String> rooms = new HashSet<>();
-    protected Set<String> clients = new HashSet<>();
-    protected HashMap<String, String> rent = new HashMap<>();
+    protected static Set<String> rooms = new HashSet<>();
+    protected static Set<String> clients = new HashSet<>();
+    protected static HashMap<String, String> rent = new HashMap<>();
 
-    public BaseServlet() {
+    static {
         for (int i = 1; i < 5; i++) {
-            this.rooms.add("Room " + i);
-            this.clients.add("Client " + i);
+            rooms.add("Room " + i);
+            clients.add("Client " + i);
         }
 
         rent.put("Client 2", "Room 1");
