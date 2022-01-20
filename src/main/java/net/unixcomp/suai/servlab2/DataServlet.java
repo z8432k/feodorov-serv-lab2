@@ -3,9 +3,9 @@ package net.unixcomp.suai.servlab2;
 import javax.servlet.http.HttpServlet;
 
 public class DataServlet extends HttpServlet  {
-    protected Data data;
+    protected static  Data data;
 
-    public DataServlet() {
+    static {
         data = new Data();
     }
 }
