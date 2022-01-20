@@ -3,11 +3,15 @@
 <html>
 <head>
     <title>JSP - Hello World</title>
+    <meta charset="utf-8">
 </head>
 <body>
-<h1><%= "Hello World!" %>
+<h1><%= "Servlets." %>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+<a href="rooms">Комнаты</a><br />
+<a href="people">Люди</a><br />
+<a href="rights">Права</a><br />
+
 </body>
 </html>
