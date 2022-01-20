@@ -12,16 +12,8 @@ import java.util.HashMap;
 import java.util.Set;
 
 
-@WebServlet(name="rights", urlPatterns = "/rights")
-public class RightsServlet extends BaseServlet {
-    private Data data;
-
-    @Override
-    public void init() throws ServletException {
-        super.init();
-
-        data = new Data();
-    }
+// @WebServlet(name="rent", urlPatterns = "/rent")
+public class RentServlet extends BaseServlet {
 
     @Override
     public void doGet(HttpServletRequest req, @NotNull HttpServletResponse res) throws IOException {
@@ -32,7 +24,7 @@ public class RightsServlet extends BaseServlet {
         out.println("<hr />");
 
         out.println("<html><head><meta charset=\"utf-8\"></head><body>");
-        out.println("<h1>Rights</h1>");
+        out.println("<h1>Rent</h1>");
 
         out.println("<table border='1'>");
 

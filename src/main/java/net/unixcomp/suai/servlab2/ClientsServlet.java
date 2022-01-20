@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 
 
 @WebServlet(name="clients", urlPatterns = "/clients")
-public class PeopleServlet extends BaseServlet {
+public class ClientsServlet extends BaseServlet {
     @Override
     public void doGet(HttpServletRequest req, @NotNull HttpServletResponse res) throws IOException {
         res.setContentType("text/html");

@@ -9,9 +9,9 @@
 <h1><%= "Servlets." %>
 </h1>
 <br/>
-<a href="rooms">Комнаты</a><br />
-<a href="people">Люди</a><br />
-<a href="rights">Права</a><br />
+<a href="rooms">Помещения</a>
+<a href="clients">Клиенты</a>
+<a href="rent">Аренда</a>
 
 </body>
 </html>
