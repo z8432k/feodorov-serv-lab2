@@ -38,11 +38,13 @@ public class RightsServlet extends BaseServlet {
 
         out.println("<thead><tr><th>Person</th><th>Room</th><th>Actions</th></tr></thead><tbody>");
 
-        data.getRights().forEach((person, rooms) -> {
+        data.getRights().forEach((client, rooms) -> {
             for (String room : rooms ) {
-                out.println("<tr><td>"+ person +"</td><td>"+ room +"</td><td>");
+                out.println("<tr><td>"+ client +"</td><td>"+ room +"</td><td>");
 
-                out.println("<form action='rights' method='POST'><input type='hidden' name='method' value='delete' /><input type='hidden' name='person' value='"+ person +"'/><input type='hidden' name='room' value='"+ room +"'/><button>REVOKE</button></form>");
+                String field = ""++ ::
+
+                out.println("<form action='rights' method='POST'><input type='hidden' name='method' value='delete' /><input type='hidden' name='rights' value=''/><button>REVOKE</button></form>");
 
 
                 out.println("</td></tr>");
@@ -54,8 +56,8 @@ public class RightsServlet extends BaseServlet {
 
         out.println("<form method='post' path='rights'><br />");
 
-        out.println("<label>Person <select name='person'>"+ options(data.getPeople()) +"</select></label><br />");
-        out.println("<label>Room <select name='room'>"+ options(data.getRooms()) +"</select></label><br />");
+        out.println("<label>Person <select name='person'>"+ printOptions(data.getPeople(), null) +"</select></label><br />");
+        out.println("<label>Room <select name='room'>"+ printOptions(data.getRooms(), null) +"</select></label><br />");
 
         out.println("<button type='submit'>GRANT</button></form>");
         out.println("</body></html>");
@@ -64,37 +66,51 @@ public class RightsServlet extends BaseServlet {
     @Override
     public void doPost(HttpServletRequest req, @NotNull HttpServletResponse res) throws IOException {
         String room = req.getParameter("room");
-        String person = req.getParameter("person");
+        String client = req.getParameter("client");
         String method = req.getParameter("method");
-
-        if (room == null || person == null) {
-            res.setStatus(400);
-            PrintWriter out = res.getWriter();
-            out.println("Bad request.");
-
-            return;
-        }
 
         if (method != null && method.equals("delete")) {
 
-            data.revoke(person, room);
+            if (client != null) {
+                synchronized (BaseServlet.class) {
+                    rent.remove(client);
+                }
+            }
+            else {
+                res.setStatus(400);
+                PrintWriter out = res.getWriter();
+                out.println("Bad request.");
+            }
 
             res.setStatus(302);
-            res.setHeader("Location", "rights");
+            res.setHeader("Location", "rent");
         }
         else {
+            if (room == null || client == null) {
+                res.setStatus(400);
+                PrintWriter out = res.getWriter();
+                out.println("Bad request.");
+            }
+            else {
+                if (!rent.containsValue(room)) {
+                    synchronized (BaseServlet.class) {
+                        rent.put(client, room);
+                    }
+                }
 
-            data.grant(person, room);
-
-            res.setStatus(302);
-            res.setHeader("Location", "rights");
-        }
+                res.setStatus(302);
+                res.setHeader("Location", "rent");
+            }        }
     }
 
-    private String options(@NotNull Set<String> set) {
+    private String printOptions(@NotNull Set<String> set, HashMap<String, String> rent) {
         String out = "";
 
         for (String s : set) {
+            if (rent != null && rent.containsValue(s)) {
+                continue;
+            }
+
             out += "<option>"+ s +"</option>";
         }
 
