@@ -35,3 +35,4 @@ public class ClientsServlet extends BaseServlet {
         processForm(req, res, clients, "name", "clients");
     }
 }
+/*EOF*/
